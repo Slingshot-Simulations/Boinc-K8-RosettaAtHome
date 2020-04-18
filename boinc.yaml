@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: boinc
+spec:
+  selector:
+    matchLabels:
+      app: boinc
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: boinc 
+    spec:
+      containers:
+      - name: boinc
+        imagePullPolicy: Never # <-- prevents trying to pull from docker central!
+        image: boinc
+        args: ["-attach_project", "http://boinc.bakerlab.org/rosetta/", "<INSERT YOUR KEY HERE>"]
